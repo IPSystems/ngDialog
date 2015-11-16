@@ -633,6 +633,10 @@
 
                             dialogsCount += 1;
 
+                            $rootScope.$watch(function() {checkScrollbarVisibility();});
+
+                            angular.element($window).bind('resize', checkScrollbarVisibility);
+
                             return publicMethods;
                         });
 
@@ -666,6 +670,23 @@
                             }
 
                             return loadTemplateUrl(tmpl, {cache: $templateCache});
+                        }
+
+                        function checkScrollbarVisibility() {
+                            var ngDialogOverlay = angular.element(document.querySelector('.ngdialog-overlay'));
+                            if (ngDialogOverlay[0]) {
+                                if ($window.innerHeight < getDocHeight(document.querySelector('.ngdialog'))) {
+                                    ngDialogOverlay.addClass('scrollbar-visible');
+                                } else {
+                                    ngDialogOverlay.removeClass('scrollbar-visible');
+                                }
+                            }
+                        }
+
+                        function getDocHeight(element) {
+                            return Math.max(
+                                element.clientHeight, element.scrollHeight, element.offsetHeight
+                            );
                         }
                     },
 

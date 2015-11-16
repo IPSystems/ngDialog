@@ -85,3 +85,7 @@ html.ngdialog-open,
 body.ngdialog-open {
     overflow: hidden;
 }
+
+.ngdialog.ngdialog-theme-default.slide .ngdialog-overlay.scrollbar-visible {
+    right: 15px;
+}
